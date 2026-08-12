@@ -1,0 +1,56 @@
+name: Release artifact
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Reproducible installable package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build ZIP, manifest, checksums, and SBOM
+        run: python3 scripts/build-release.py --output-dir=dist
+
+      - name: Verify contents and reproducibility
+        run: python3 tests/release-package.py --dist-dir=dist
+
+      - name: Upload verified release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cockpit-installable
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+
+  security-static:
+    name: Static security policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Scan for high-confidence secrets and dynamic execution
+        run: python3 tests/security-static.py
+
+  dependency-review:
+    name: Dependency review
+    # GitHub Dependency Review requires a public repository or GHAS. Keep the
+    # job ready for a public release without breaking private-repository CI.
+    if: github.event_name == 'pull_request' && github.event.repository.visibility == 'public'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@v4

@@ -1,0 +1,850 @@
+/* Cockpit admin workspace: Tickets structure + AdminThemeUikit tokens. */
+html.cockpit-admin-page,
+html.cockpit-admin-page body { overflow-x: hidden; }
+
+.ProcessCockpit.cockpit-workspace {
+	--cockpit-space-xs: .5rem;
+	--cockpit-space-sm: .75rem;
+	--cockpit-space-md: 1rem;
+	--cockpit-space-lg: 1.5rem;
+	--cockpit-space-xl: 2rem;
+	max-width: 100%;
+	overflow-x: hidden;
+	color: var(--pw-text-color);
+}
+
+.ProcessCockpit.cockpit-workspace,
+.ProcessCockpit.cockpit-workspace * { box-sizing: border-box; }
+.ProcessCockpit.cockpit-workspace > *,
+.ProcessCockpit.cockpit-workspace .cockpit-admin > * { min-width: 0; }
+.ProcessCockpit.cockpit-workspace h2,
+.ProcessCockpit.cockpit-workspace h3,
+.ProcessCockpit.cockpit-workspace strong,
+.ProcessCockpit.cockpit-workspace .uk-button,
+.ProcessCockpit.cockpit-workspace .uk-form-label { font-weight: 500; }
+.ProcessCockpit.cockpit-workspace .uk-button,
+.ProcessCockpit.cockpit-workspace .uk-button:hover,
+.ProcessCockpit.cockpit-workspace .uk-button:focus,
+.ProcessCockpit.cockpit-workspace .uk-button:active,
+.ProcessCockpit.cockpit-workspace .cockpit-admin-nav a,
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel a { text-decoration: none; }
+.ProcessCockpit.cockpit-workspace .uk-button-text::before { display: none; }
+.ProcessCockpit.cockpit-workspace .uk-text-meta.uk-text-uppercase {
+	font-weight: 600;
+	letter-spacing: .055em;
+}
+.ProcessCockpit.cockpit-workspace .uk-input,
+.ProcessCockpit.cockpit-workspace .uk-select,
+.ProcessCockpit.cockpit-workspace .uk-textarea {
+	background: var(--pw-inputs-background);
+	color: var(--pw-text-color);
+}
+
+.ProcessCockpit.cockpit-workspace .cockpit-admin-nav {
+	align-items: flex-start;
+	gap: var(--cockpit-space-md);
+	margin-bottom: var(--cockpit-space-xl);
+	padding-bottom: var(--cockpit-space-sm);
+	border-bottom: 1px solid color-mix(in srgb, var(--pw-border-color) 72%, transparent);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-admin-nav-list {
+	margin-bottom: 0;
+	overflow-x: auto;
+	overflow-y: hidden;
+	flex-wrap: nowrap;
+	scrollbar-width: thin;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-admin-nav-list > li > a { white-space: nowrap; }
+.ProcessCockpit.cockpit-workspace .cockpit-admin-settings {
+	display: grid;
+	width: 3rem;
+	height: 3rem;
+	place-items: center;
+	color: var(--pw-muted-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-admin-settings svg {
+	display: block;
+	width: 2rem;
+	height: 2rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-admin-settings:hover,
+.ProcessCockpit.cockpit-workspace .cockpit-admin-settings:focus-visible {
+	background: color-mix(in srgb, var(--pw-border-color) 35%, transparent);
+}
+
+.ProcessCockpit.cockpit-workspace .cockpit-page-intro {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--cockpit-space-xl);
+	margin: 0 0 var(--cockpit-space-xl);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-page-intro-copy { max-width: 58rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-page-intro-eyebrow {
+	margin: 0 0 .45rem;
+	color: var(--pw-muted-color);
+	font-size: .75rem;
+	font-weight: 600;
+	letter-spacing: .065em;
+	text-transform: uppercase;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-page-intro-copy > p:last-child {
+	max-width: 52rem;
+	margin: .8rem 0 0;
+	color: var(--pw-muted-color);
+	font-size: clamp(1rem, 1.4vw, 1.2rem);
+	line-height: 1.5;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-page-intro .cockpit-page-intro-copy > p:not(.cockpit-page-intro-eyebrow) {
+	margin-bottom: .65rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-page-url {
+	display: inline-block;
+	max-width: 100%;
+	overflow-wrap: anywhere;
+	font-size: .9rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-page-intro-actions,
+.ProcessCockpit.cockpit-workspace .cockpit-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-page-intro-actions { flex: 0 0 auto; }
+.ProcessCockpit.cockpit-workspace .cockpit-actions form { margin: 0; }
+
+.ProcessCockpit.cockpit-workspace .cockpit-admin > * { margin-bottom: var(--cockpit-space-lg); }
+.ProcessCockpit.cockpit-workspace .cockpit-metric-grid {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-analytics-summary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ProcessCockpit.cockpit-workspace .cockpit-link-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ProcessCockpit.cockpit-workspace .cockpit-metric {
+	display: flex;
+	align-items: flex-start;
+	gap: .8rem;
+	min-width: 0;
+	padding: 1rem;
+	border: 1px solid var(--pw-border-color);
+	border-radius: var(--pw-input-radius);
+	background: var(--pw-blocks-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-metric-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 2.2rem;
+	width: 2.2rem;
+	height: 2.2rem;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--pw-primary-color, #e83561) 10%, transparent);
+	color: var(--pw-primary-color, #e83561);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-metric-icon svg { width: 1.15rem; height: 1.15rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-metric > div { min-width: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-metric > div > span,
+.ProcessCockpit.cockpit-workspace .cockpit-metric strong,
+.ProcessCockpit.cockpit-workspace .cockpit-metric small { display: block; }
+.ProcessCockpit.cockpit-workspace .cockpit-metric > div > span {
+	color: var(--pw-muted-color);
+	font-size: .78rem;
+	letter-spacing: .02em;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-metric strong {
+	margin-block: .18rem;
+	font-size: clamp(1.35rem, 2vw, 1.85rem);
+	line-height: 1.1;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-metric small {
+	color: var(--pw-muted-color);
+	font-size: .72rem;
+	line-height: 1.35;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-summary .cockpit-metric { align-items: center; min-height: 6.4rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-summary .cockpit-metric strong { font-variant-numeric: tabular-nums; }
+
+.ProcessCockpit.cockpit-workspace .cockpit-insight-grid {
+	display: grid;
+	grid-template-columns: minmax(20rem, 1.55fr) minmax(19rem, .75fr);
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-panel {
+	min-width: 0;
+	padding: 1rem;
+	border: 1px solid var(--pw-border-color);
+	border-radius: var(--pw-input-radius);
+	background: var(--pw-blocks-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-section {
+	padding-top: var(--cockpit-space-lg);
+	border-top: 1px solid var(--pw-border-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-overview { padding: 1.15rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-link-section-nav {
+	padding: .15rem 0;
+	overflow-x: auto;
+	scrollbar-width: thin;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-section-nav .uk-subnav {
+	flex-wrap: nowrap;
+	width: max-content;
+	min-width: 100%;
+	margin-bottom: 0;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-section-nav a { white-space: nowrap; }
+.ProcessCockpit.cockpit-workspace .cockpit-link-traffic-stack { display: grid; gap: var(--cockpit-space-sm); }
+.ProcessCockpit.cockpit-workspace .cockpit-link-facts {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1px;
+	margin: 0;
+	border: 1px solid var(--pw-border-color);
+	background: var(--pw-border-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-fact {
+	min-width: 0;
+	padding: .8rem .9rem;
+	background: var(--pw-blocks-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-fact dt {
+	margin-bottom: .3rem;
+	color: var(--pw-muted-color);
+	font-size: .72rem;
+	font-weight: 500;
+	letter-spacing: .035em;
+	text-transform: uppercase;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-fact dd {
+	min-width: 0;
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-fact dd a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-panel-heading {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--cockpit-space-md);
+	margin-bottom: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-panel-heading h2 {
+	margin: .15rem 0 0;
+	font-size: 1.35rem;
+	line-height: 1.25;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-panel-heading p:last-child { margin: .35rem 0 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-canvas-wrap {
+	position: relative;
+	min-width: 0;
+	height: 13rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
+.ProcessCockpit.cockpit-workspace .cockpit-chart-series {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .45rem 1rem;
+	margin: 0 0 .4rem;
+	color: var(--pw-muted-color);
+	font-size: .7rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-series > span { display: inline-flex; align-items: center; gap: .4rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-chart-series i {
+	display: block;
+	width: 1.4rem;
+	border-top: 3px solid var(--pw-main-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-series .is-previous i { border-top: 2px dashed var(--pw-muted-color); }
+.ProcessCockpit.cockpit-workspace .cockpit-chart-tooltip {
+	position: absolute;
+	z-index: 2;
+	display: grid;
+	gap: 2px;
+	min-width: 110px;
+	padding: 8px 10px;
+	background: var(--pw-text-color);
+	color: var(--pw-blocks-background);
+	font-size: 12px;
+	pointer-events: none;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-donut-layout {
+	display: grid;
+	grid-template-columns: minmax(130px, .8fr) minmax(180px, 1fr);
+	align-items: center;
+	gap: var(--cockpit-space-md);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-donut-wrap {
+	justify-self: center;
+	width: min(100%, 11rem);
+	height: auto;
+	aspect-ratio: 1;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-legend {
+	display: grid;
+	gap: .55rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-legend li {
+	display: grid;
+	grid-template-columns: 10px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: .5rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-legend li > span:nth-child(2) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-legend strong {
+	display: flex;
+	align-items: baseline;
+	justify-content: flex-end;
+	gap: .4rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-chart-legend strong small {
+	min-width: 2.8rem;
+	color: var(--pw-muted-color);
+	font-size: .68rem;
+	font-weight: 400;
+	text-align: right;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-legend-swatch { width: 10px; height: 10px; border-radius: 50%; }
+
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel {
+	display: grid;
+	grid-template-columns: minmax(15rem, 1.7fr) repeat(3, minmax(8.5rem, 1fr)) auto auto;
+	align-items: end;
+	gap: var(--cockpit-space-sm);
+	margin: 1.25rem 0 0;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-analytics-filter .cockpit-filter-panel {
+	grid-template-columns: repeat(2, minmax(8.5rem, .8fr)) minmax(15rem, 1.5fr) repeat(3, minmax(8.5rem, 1fr)) auto;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-filter {
+	margin-bottom: var(--cockpit-space-md);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-filter {
+	grid-template-columns: minmax(13rem, 1.5fr) repeat(4, minmax(8.5rem, 1fr)) auto auto;
+	margin-bottom: var(--cockpit-space-md);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel > *,
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-input,
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-select,
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-button { min-width: 0; width: 100%; }
+.ProcessCockpit.cockpit-workspace .cockpit-inventory-title {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-inventory-title > span {
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel label {
+	display: grid;
+	align-content: end;
+	gap: .35rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-form-label {
+	display: block;
+	margin: 0;
+	font-size: .76rem;
+	line-height: 1.25;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-input,
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-select,
+.ProcessCockpit.cockpit-workspace .cockpit-filter-panel .uk-button { height: 2.65rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-filter-summary {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .45rem;
+	margin-top: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-filter-summary > span {
+	max-width: min(22rem, 100%);
+	padding: .3rem .55rem;
+	border: 1px solid var(--pw-border-color);
+	border-radius: 999px;
+	color: var(--pw-muted-color);
+	font-size: .7rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-checkbox {
+	display: flex;
+	align-items: center;
+	height: 2.65rem;
+	gap: .4rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-link-filter .cockpit-checkbox {
+	padding: 0 .75rem;
+	border: 1px solid var(--pw-border-color);
+	background: var(--pw-inputs-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-presets {
+	margin: 0 0 var(--cockpit-space-sm);
+	overflow-x: auto;
+	flex-wrap: nowrap;
+	scrollbar-width: thin;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-presets > * { flex: 0 0 auto; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-presets > :first-child { padding-left: 0; }
+
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel {
+	max-width: 100%;
+	border: 1px solid var(--pw-border-color);
+	border-radius: var(--pw-input-radius);
+	overflow: auto;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel table { min-width: 680px; margin: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel thead {
+	background: color-mix(in srgb, var(--pw-border-color) 28%, transparent);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel th,
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel td { padding-inline: .85rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-top-links .cockpit-table-panel table { min-width: 760px; }
+.ProcessCockpit.cockpit-workspace .cockpit-top-links .cockpit-row-actions { justify-content: flex-end; }
+.ProcessCockpit.cockpit-workspace .cockpit-top-links { max-width: 100%; overflow: hidden; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section { max-width: 100%; overflow: hidden; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section .cockpit-table-panel table {
+	width: 100%;
+	min-width: 920px;
+	table-layout: fixed;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-links-section th:nth-child(1) { width: 26%; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section th:nth-child(2) { width: 27%; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section th:nth-child(3) { width: 13%; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section th:nth-child(4) { width: 8%; text-align: right; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section th:nth-child(5) { width: 12%; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section th:nth-child(6) { width: 14%; }
+.ProcessCockpit.cockpit-workspace .cockpit-links-section time { display: block; white-space: nowrap; }
+.ProcessCockpit.cockpit-workspace .cockpit-ranked-link {
+	display: grid;
+	grid-template-columns: 2ch minmax(0, 1fr);
+	align-items: center;
+	gap: .65rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-rank,
+.ProcessCockpit.cockpit-workspace .cockpit-click-count {
+	font-variant-numeric: tabular-nums;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-rank { color: var(--pw-muted-color); font-size: .72rem; text-align: right; }
+.ProcessCockpit.cockpit-workspace .cockpit-top-links time { white-space: nowrap; }
+
+.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form {
+	display: grid;
+	grid-template-columns: minmax(12rem, 1fr) minmax(20rem, 2fr) minmax(10rem, .7fr) minmax(8rem, .55fr) auto;
+	align-items: end;
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form label { display: grid; gap: .35rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-field-help {
+	max-width: 28rem;
+	color: var(--pw-muted-color);
+	font-size: .72rem;
+	line-height: 1.4;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-quick-redirect-help {
+	grid-column: 1 / -1;
+	max-width: none;
+	margin: 0;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form .uk-input,
+.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form .uk-select,
+.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form .uk-button { height: 2.65rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-quick-enabled > span:last-child {
+	display: flex;
+	align-items: center;
+	height: 2.65rem;
+	gap: .4rem;
+	padding: 0 .75rem;
+	border: 1px solid var(--pw-border-color);
+	background: var(--pw-inputs-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-quick-created { margin: 0 0 var(--cockpit-space-sm); }
+.ProcessCockpit.cockpit-workspace .cockpit-quick-created > span { display: grid; flex: 1; gap: .15rem; min-width: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-target-cell { max-width: 32rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-target-cell a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-short-url-cell { max-width: 24rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-short-url {
+	display: flex;
+	align-items: center;
+	gap: .35rem;
+	min-width: 0;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-short-url > a {
+	display: block;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-short-url > a code {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-short-url .cockpit-icon-button { flex: 0 0 2.25rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-status-cell {
+	display: grid;
+	grid-template-columns: 3ch max-content;
+	align-items: center;
+	gap: .5rem;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-status-code {
+	display: block;
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: "tnum" 1;
+	text-align: right;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-title {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-summary {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: var(--cockpit-space-sm);
+	margin: var(--cockpit-space-md) 0 0;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-summary > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: .6rem;
+	padding: .65rem .75rem;
+	border: 1px solid var(--pw-border-color);
+	border-radius: var(--pw-input-radius);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-summary strong { font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section .cockpit-table-panel table {
+	width: 100%;
+	min-width: 820px;
+	table-layout: fixed;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section th:nth-child(1) { width: 17%; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section th:nth-child(2) { width: 13%; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section th:nth-child(3) { width: 11%; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section th:nth-child(4) { width: 27%; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section th:nth-child(5) { width: 32%; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-section time { white-space: nowrap; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-actor { display: inline-flex; align-items: center; gap: .5rem; min-width: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-actor i {
+	display: grid;
+	place-items: center;
+	flex: 0 0 1.7rem;
+	width: 1.7rem;
+	height: 1.7rem;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--pw-main-color) 12%, transparent);
+	color: var(--pw-main-color);
+	font-size: .68rem;
+	font-style: normal;
+	font-weight: 600;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-audit-change { display: grid; gap: .35rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-fields { display: flex; flex-wrap: wrap; gap: .3rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-audit-change > small { color: var(--pw-muted-color); font-size: .68rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-row-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: .35rem;
+	white-space: nowrap;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-row-actions form { margin: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
+	border: 0;
+	border-radius: var(--pw-input-radius);
+	background: transparent;
+	color: var(--pw-text-color);
+	cursor: pointer;
+	text-decoration: none;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button:hover,
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button:focus-visible {
+	background: transparent;
+	color: var(--pw-main-color);
+	outline: none;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button.is-copied {
+	color: var(--pw-success-color, #32d296);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button:focus-visible {
+	box-shadow: none;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button:focus-visible .cockpit-action-icon {
+	filter: drop-shadow(0 0 .2rem currentColor);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button-danger:hover,
+.ProcessCockpit.cockpit-workspace .cockpit-icon-button-danger:focus-visible {
+	background: transparent;
+	color: var(--pw-error-inline-text-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-action-icon { width: 1.1rem; height: 1.1rem; }
+.cockpit-copy-toast {
+	position: fixed;
+	top: 4.5rem;
+	right: 1.25rem;
+	z-index: 1100;
+	max-width: min(24rem, calc(100vw - 2rem));
+	padding: .7rem 1rem;
+	border-radius: var(--pw-input-radius, 3px);
+	background: var(--pw-blocks-background, #222);
+	box-shadow: 0 .45rem 1.5rem rgba(0, 0, 0, .22);
+	color: var(--pw-text-color, #fff);
+	font-size: .875rem;
+	opacity: 0;
+	transform: translateY(-.4rem);
+	pointer-events: none;
+	transition: opacity .16s ease, transform .16s ease;
+}
+.cockpit-copy-toast.is-visible { opacity: 1; transform: translateY(0); }
+.ProcessCockpit.cockpit-workspace .cockpit-visually-hidden {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
+}
+
+.ProcessCockpit.cockpit-workspace .cockpit-period-strip {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-summary {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--cockpit-space-md);
+	cursor: pointer;
+	list-style: none;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-summary::-webkit-details-marker { display: none; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-summary h2 { margin: .15rem 0 0; font-size: 1.35rem; font-weight: 500; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-summary p:last-child { margin: .35rem 0 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: .5rem;
+	flex: 0 0 auto;
+	color: var(--pw-muted-color);
+	font-size: .72rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-toggle i {
+	width: .55rem;
+	height: .55rem;
+	border-right: 1px solid currentColor;
+	border-bottom: 1px solid currentColor;
+	transform: rotate(45deg) translateY(-.15rem);
+	transition: transform .15s ease;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-toggle .is-open { display: none; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-card[open] .cockpit-period-toggle .is-open { display: inline; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-card[open] .cockpit-period-toggle .is-closed { display: none; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-card[open] .cockpit-period-toggle i { transform: rotate(225deg) translate(-.1rem, -.1rem); }
+.ProcessCockpit.cockpit-workspace .cockpit-period-card[open] .cockpit-period-strip { margin-top: var(--cockpit-space-md); }
+.ProcessCockpit.cockpit-workspace .cockpit-period-item {
+	display: grid;
+	gap: .7rem;
+	min-width: 0;
+	padding: .85rem;
+	border: 1px solid var(--pw-border-color);
+	border-radius: var(--pw-input-radius);
+	background: var(--pw-blocks-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-item.is-peak { border-color: var(--pw-primary-color); }
+.ProcessCockpit.cockpit-workspace .cockpit-period-item.is-latest {
+	background: color-mix(in srgb, var(--pw-primary-color) 5%, var(--pw-blocks-background));
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-item > header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: .5rem;
+	min-height: 2rem;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-item time,
+.ProcessCockpit.cockpit-workspace .cockpit-period-item time > * { display: block; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-item time > strong { font-size: .82rem; line-height: 1.2; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-item time > small { margin-top: .15rem; color: var(--pw-muted-color); font-size: .68rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-flags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .25rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-flags .uk-label { padding: 0 .35rem; font-size: .58rem; line-height: 1.45rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-latest { background: var(--pw-muted-color); }
+.ProcessCockpit.cockpit-workspace .cockpit-period-value { display: flex; align-items: baseline; gap: .35rem; }
+.ProcessCockpit.cockpit-workspace .cockpit-period-value > strong {
+	font-size: 1.35rem;
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-period-item .uk-progress {
+	min-width: 0;
+	height: 5px;
+	margin: 0;
+}
+
+.ProcessCockpit.cockpit-workspace .cockpit-editor { margin: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields.uk-grid-match > .InputfieldColumnWidth {
+	height: auto !important;
+	align-self: flex-start;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields.uk-grid-match > .InputfieldColumnWidth > .InputfieldContent {
+	height: auto !important;
+	padding: .75rem !important;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields > .InputfieldColumnWidth > .InputfieldContent > .description {
+	margin: 0 0 .55rem;
+	font-size: .75rem;
+	line-height: 1.35;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields > .InputfieldColumnWidth > .InputfieldContent > .notes {
+	margin: .4rem 0 0;
+	font-size: .7rem;
+	line-height: 1.35;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-editor-section { scroll-margin-top: var(--cockpit-space-lg); }
+.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields { margin: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-editor .Inputfield_submit_link {
+	clear: both;
+	width: 100% !important;
+	margin-top: 0 !important;
+	padding-top: var(--cockpit-space-md);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-editor .Inputfield_submit_link > .InputfieldContent {
+	display: flex;
+	justify-content: flex-end;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-editor .Inputfield_utm_builder {
+	clear: both;
+	width: 100% !important;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-utm-output {
+	display: grid;
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-utm-preview {
+	display: block;
+	min-height: 2.65rem;
+	padding: .7rem .8rem;
+	overflow-wrap: anywhere;
+	white-space: normal;
+	word-break: break-word;
+	border: 1px solid var(--pw-border-color);
+	background: var(--pw-inputs-background);
+	color: var(--pw-text-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-utm-message { min-height: 1.25rem; margin: 0; }
+.ProcessCockpit.cockpit-workspace .cockpit-utm-message[data-state="error"] { color: var(--pw-error-inline-text-color); }
+.ProcessCockpit.cockpit-workspace .cockpit-utm-message[data-state="success"] { color: var(--pw-alert-success); }
+.ProcessCockpit.cockpit-workspace .cockpit-utm-actions {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--cockpit-space-sm);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-created {
+	display: flex;
+	align-items: center;
+	gap: var(--cockpit-space-sm);
+	margin-top: var(--cockpit-space-md);
+	padding: var(--cockpit-space-sm);
+	border: 1px solid var(--pw-border-color);
+	background: var(--pw-blocks-background);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-created code { flex: 1; overflow-wrap: anywhere; }
+.ProcessCockpit.cockpit-workspace .cockpit-qr-layout {
+	display: grid;
+	grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
+	align-items: center;
+	gap: var(--cockpit-space-lg);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-qr-preview {
+	display: grid;
+	place-items: center;
+	padding: 1rem;
+	border: 1px solid var(--pw-border-color);
+	background: #fff;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-qr-preview img { display: block; width: 100%; max-width: 240px; height: auto; }
+.ProcessCockpit.cockpit-workspace .cockpit-empty-state {
+	margin: 0;
+	padding: var(--cockpit-space-xl) var(--cockpit-space-md);
+	color: var(--pw-muted-color);
+}
+.ProcessCockpit.cockpit-workspace .cockpit-empty-state h3 { margin: .6rem 0 .25rem; color: var(--pw-text-color); }
+
+@media (max-width: 1199px) {
+	.ProcessCockpit.cockpit-workspace .cockpit-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-link-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-insight-grid { grid-template-columns: minmax(0, 1fr); }
+	.ProcessCockpit.cockpit-workspace .cockpit-period-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-filter-panel,
+	.ProcessCockpit.cockpit-workspace .cockpit-analytics-filter .cockpit-filter-panel,
+	.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-audit-filter { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-audit-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-filter-link { grid-column: span 2; }
+	.ProcessCockpit.cockpit-workspace .cockpit-quick-target { grid-column: span 2; }
+	.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields > .InputfieldColumnWidth:not(.Inputfield_submit_link) { width: 50% !important; }
+	.ProcessCockpit.cockpit-workspace .cockpit-summary > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+@media (max-width: 639px) {
+	.ProcessCockpit.cockpit-workspace .cockpit-admin-nav { margin-bottom: var(--cockpit-space-lg); }
+	.ProcessCockpit.cockpit-workspace .cockpit-page-intro,
+	.ProcessCockpit.cockpit-workspace .cockpit-panel-heading { align-items: flex-start; flex-direction: column; }
+	.ProcessCockpit.cockpit-workspace .cockpit-page-intro-actions,
+	.ProcessCockpit.cockpit-workspace .cockpit-page-intro-actions > *,
+	.ProcessCockpit.cockpit-workspace .cockpit-actions { width: 100%; }
+	.ProcessCockpit.cockpit-workspace .cockpit-page-intro-actions > .uk-button { flex: 1 1 0; text-align: center; }
+	.ProcessCockpit.cockpit-workspace .cockpit-metric-grid,
+	.ProcessCockpit.cockpit-workspace .cockpit-filter-panel,
+	.ProcessCockpit.cockpit-workspace .cockpit-analytics-filter .cockpit-filter-panel,
+	.ProcessCockpit.cockpit-workspace .cockpit-quick-create-form { grid-template-columns: minmax(0, 1fr); }
+	.ProcessCockpit.cockpit-workspace .cockpit-audit-filter,
+	.ProcessCockpit.cockpit-workspace .cockpit-audit-summary { grid-template-columns: minmax(0, 1fr); }
+	.ProcessCockpit.cockpit-workspace .cockpit-link-facts { grid-template-columns: minmax(0, 1fr); }
+	.ProcessCockpit.cockpit-workspace .cockpit-summary > :last-child:nth-child(odd) { grid-column: auto; }
+	.ProcessCockpit.cockpit-workspace .cockpit-period-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.ProcessCockpit.cockpit-workspace .cockpit-filter-link { grid-column: auto; }
+	.ProcessCockpit.cockpit-workspace .cockpit-quick-target { grid-column: auto; }
+	.ProcessCockpit.cockpit-workspace .cockpit-donut-layout,
+	.ProcessCockpit.cockpit-workspace .cockpit-qr-layout { grid-template-columns: minmax(0, 1fr); }
+	.ProcessCockpit.cockpit-workspace .cockpit-canvas-wrap { height: 11rem; }
+	.ProcessCockpit.cockpit-workspace .cockpit-created { align-items: stretch; flex-direction: column; }
+	.ProcessCockpit.cockpit-workspace .cockpit-editor > .Inputfields > .InputfieldColumnWidth:not(.Inputfield_submit_link) { width: 100% !important; }
+	.ProcessCockpit.cockpit-workspace .cockpit-editor .Inputfield_submit_link > .InputfieldContent,
+	.ProcessCockpit.cockpit-workspace .cockpit-editor .Inputfield_submit_link button { width: 100%; }
+	.ProcessCockpit.cockpit-workspace .cockpit-utm-actions,
+	.ProcessCockpit.cockpit-workspace .cockpit-utm-actions .uk-button { width: 100%; }
+}
