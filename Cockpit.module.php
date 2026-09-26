@@ -41,7 +41,7 @@ class Cockpit extends WireData implements Module, ConfigurableModule {
 			'summary' => 'Manage custom-path redirects and click statistics from the ProcessWire admin or CLI.',
 			'author' => 'Maxim Semenov',
 			'href' => 'https://github.com/mxmsmnv/Cockpit',
-			'version' => 101,
+			'version' => 102,
 			'requires' => 'ProcessWire>=3.0.200',
 			'singular' => true,
 			'autoload' => true,
@@ -494,8 +494,8 @@ class Cockpit extends WireData implements Module, ConfigurableModule {
 	public function getDashboardTotals(): array {
 		$db = $this->wire('database');
 		$linkTotals = $db->query(
-			'SELECT COUNT(*) AS links, COALESCE(SUM(`enabled`=1),0) AS active_links, '
-			. 'COALESCE(SUM(`enabled`=0),0) AS disabled_links, COALESCE(SUM(`hits`),0) AS total '
+			'SELECT COUNT(*) AS links, COALESCE(SUM(CASE WHEN `enabled`=1 THEN 1 ELSE 0 END),0) AS active_links, '
+			. 'COALESCE(SUM(CASE WHEN `enabled`=0 THEN 1 ELSE 0 END),0) AS disabled_links, COALESCE(SUM(`hits`),0) AS total '
 			. 'FROM ' . $this->linksTable()
 		)->fetch(\PDO::FETCH_ASSOC) ?: [];
 		$today = date('Y-m-d 00:00:00');

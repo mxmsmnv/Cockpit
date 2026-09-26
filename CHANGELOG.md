@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 — 2026-09-26
+
+- Replaced boolean `SUM()` expressions in dashboard link totals with portable
+  conditional aggregates for PostgreSQL.
+
 ## 1.0.1 — 2026-09-26
 
 - Added portable MySQL, SQLite, and PostgreSQL schema introspection through ProcessWire's public database helpers.

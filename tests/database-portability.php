@@ -2,6 +2,7 @@
 
 $schema = file_get_contents(__DIR__ . '/../src/CockpitSchemaManager.php');
 $audit = file_get_contents(__DIR__ . '/../src/Audit/CockpitAuditLog.php');
+$module = file_get_contents(__DIR__ . '/../Cockpit.module.php');
 
 if ($schema === false || $audit === false) {
 	fwrite(STDERR, "Unable to read Cockpit database services.\n");
@@ -15,6 +16,8 @@ $checks = [
 	'SQLite foreign keys are inspected with PRAGMA' => str_contains($schema, 'PRAGMA foreign_key_list('),
 	'SQLite foreign key repair is transactional' => str_contains($schema, 'rebuildSQLiteStatsForeignKey'),
 	'audit availability uses public introspection' => str_contains($audit, '->tableExists($this->tableName)'),
+	'dashboard counts use portable conditional aggregates' => substr_count($module, 'SUM(CASE WHEN `enabled`=') === 2
+		&& !str_contains($module, 'SUM(`enabled`='),
 ];
 
 foreach ($checks as $label => $passed) {

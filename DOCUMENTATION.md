@@ -2,7 +2,7 @@
 
 Cockpit is a ProcessWire control center for memorable short links, campaign URLs, QR destinations, and privacy-minimal aggregate click statistics. It owns only explicitly configured paths that are not already claimed by ProcessWire or another known router.
 
-This is the canonical setup and operations guide for Cockpit 1.0.0. Use [API.md](API.md) for exact PHP method contracts and [EXAMPLES.md](EXAMPLES.md) for copyable integrations.
+This is the canonical setup and operations guide for Cockpit 1.0.2. Use [API.md](API.md) for exact PHP method contracts and [EXAMPLES.md](EXAMPLES.md) for copyable integrations.
 
 ## Contents
 

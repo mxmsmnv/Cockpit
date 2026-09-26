@@ -1,6 +1,6 @@
 # Cockpit Public API
 
-This document describes the public PHP surface verified in Cockpit 1.0.0. For installation, configuration, permissions, operations, and troubleshooting, see [DOCUMENTATION.md](DOCUMENTATION.md).
+This document describes the public PHP surface verified in Cockpit 1.0.2. For installation, configuration, permissions, operations, and troubleshooting, see [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Olivia Usage Rules
 
