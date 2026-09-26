@@ -70,7 +70,7 @@ Requirements:
 
 - ProcessWire 3.0.200+
 - PHP 7.4+
-- MySQL 5.7+ or MariaDB 10.3+
+- MySQL 5.7+, MariaDB 10.3+, SQLite, or PostgreSQL through ProcessWire's database layer
 
 Install:
 

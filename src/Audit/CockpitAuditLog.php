@@ -47,11 +47,7 @@ final class CockpitAuditLog {
 	}
 
 	public function isAvailable(): bool {
-		$stmt = $this->database->prepare(
-			'SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=:table'
-		);
-		$stmt->execute([':table' => $this->tableName]);
-		return (bool)$stmt->fetchColumn();
+		return $this->database->tableExists($this->tableName);
 	}
 
 	/**

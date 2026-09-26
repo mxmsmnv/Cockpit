@@ -52,7 +52,7 @@ foreach ($phpFiles as $file) {
 }
 echo 'PASS static-lint (' . count($phpFiles) . " files)\n";
 
-foreach (['path-policy.php', 'route-inspection.php', 'code-provider.php', 'transfer-service.php', 'admin-ui.php'] as $standaloneTest) {
+foreach (['path-policy.php', 'route-inspection.php', 'code-provider.php', 'transfer-service.php', 'admin-ui.php', 'database-portability.php'] as $standaloneTest) {
 	if (cockpitRunCommand([PHP_BINARY, $root . '/tests/' . $standaloneTest]) !== 0) {
 		fwrite(STDERR, "FAIL {$standaloneTest}\n");
 		exit(1);

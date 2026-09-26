@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-09-26
+
+- Added portable MySQL, SQLite, and PostgreSQL schema introspection through ProcessWire's public database helpers.
+- Created the statistics foreign key inline on fresh installs and added a transactional SQLite rebuild for existing statistics tables that lack it.
+
 ## 1.0.0 — 2026-08-12
 
 First release of Cockpit.

@@ -221,6 +221,7 @@ final class CockpitSchemaManager {
 	}
 
 	private function ensureBaseTables(): void {
+		$constraint = 'fk_cockpit_' . substr(sha1($this->statsName . ':' . $this->linksName), 0, 16);
 		$this->database->exec('CREATE TABLE IF NOT EXISTS ' . $this->quoteName($this->linksName) . ' (
 			`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 			`path` VARCHAR(191) NOT NULL,
@@ -242,7 +243,9 @@ final class CockpitSchemaManager {
 			`click_date` DATE NOT NULL,
 			`clicks` BIGINT UNSIGNED NOT NULL DEFAULT 0,
 			PRIMARY KEY (`link_id`, `click_date`),
-			KEY `click_date` (`click_date`)
+			KEY `click_date` (`click_date`),
+			CONSTRAINT ' . $this->quoteName($constraint) . ' FOREIGN KEY (`link_id`) REFERENCES '
+			. $this->quoteName($this->linksName) . ' (`id`) ON DELETE CASCADE
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4');
 	}
 
@@ -305,6 +308,10 @@ final class CockpitSchemaManager {
 			);
 		}
 		$constraint = 'fk_cockpit_' . substr(sha1($this->statsName . ':' . $this->linksName), 0, 16);
+		if ($this->dialectName() === 'sqlite') {
+			$this->rebuildSQLiteStatsForeignKey($constraint);
+			return;
+		}
 		$this->database->exec(
 			'ALTER TABLE ' . $this->quoteName($this->statsName)
 			. ' ADD CONSTRAINT ' . $this->quoteName($constraint)
@@ -317,6 +324,35 @@ final class CockpitSchemaManager {
 	}
 
 	private function statsForeignKeyDeleteRules(): array {
+		if ($this->dialectName() === 'sqlite') {
+			$rows = $this->database->query('PRAGMA foreign_key_list(' . $this->quoteName($this->statsName) . ')')->fetchAll(\PDO::FETCH_ASSOC);
+			$rules = [];
+			foreach ($rows as $row) {
+				if ((string)($row['table'] ?? '') !== $this->linksName || (string)($row['from'] ?? '') !== 'link_id') continue;
+				$rules[] = strtoupper((string)($row['on_delete'] ?? ''));
+			}
+			return array_values(array_unique($rules));
+		}
+		if ($this->dialectName() === 'pgsql') {
+			$stmt = $this->database->prepare(
+				'SELECT DISTINCT rc.delete_rule FROM information_schema.referential_constraints rc '
+				. 'INNER JOIN information_schema.table_constraints tc ON tc.constraint_catalog=rc.constraint_catalog '
+				. 'AND tc.constraint_schema=rc.constraint_schema AND tc.constraint_name=rc.constraint_name '
+				. 'INNER JOIN information_schema.key_column_usage k ON k.constraint_catalog=tc.constraint_catalog '
+				. 'AND k.constraint_schema=tc.constraint_schema AND k.constraint_name=tc.constraint_name '
+				. 'INNER JOIN information_schema.constraint_column_usage u ON u.constraint_catalog=rc.unique_constraint_catalog '
+				. 'AND u.constraint_schema=rc.unique_constraint_schema AND u.constraint_name=rc.unique_constraint_name '
+				. 'WHERE tc.table_schema=current_schema() AND tc.table_name=:stats AND k.column_name=:link_column '
+				. 'AND u.table_name=:links AND u.column_name=:id_column'
+			);
+			$stmt->execute([
+				':stats' => $this->statsName,
+				':link_column' => 'link_id',
+				':links' => $this->linksName,
+				':id_column' => 'id',
+			]);
+			return array_values(array_unique(array_map('strtoupper', array_map('strval', $stmt->fetchAll(\PDO::FETCH_COLUMN)))));
+		}
 		$stmt = $this->database->prepare(
 			'SELECT DISTINCT r.DELETE_RULE FROM information_schema.KEY_COLUMN_USAGE k '
 			. 'INNER JOIN information_schema.REFERENTIAL_CONSTRAINTS r '
@@ -340,15 +376,8 @@ final class CockpitSchemaManager {
 	}
 
 	private function ensureIndex(string $table, string $preferredName, array $columns, bool $unique = false): void {
-		$stmt = $this->database->prepare(
-			'SELECT INDEX_NAME, NON_UNIQUE, GROUP_CONCAT(COLUMN_NAME ORDER BY SEQ_IN_INDEX) columns_list '
-			. 'FROM information_schema.STATISTICS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=:table '
-			. 'GROUP BY INDEX_NAME, NON_UNIQUE'
-		);
-		$stmt->execute([':table' => $table]);
-		$wanted = implode(',', $columns);
-		foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $index) {
-			if ((string)$index['columns_list'] === $wanted && (!$unique || (int)$index['NON_UNIQUE'] === 0)) return;
+		foreach ($this->database->getIndexes($table, true) as $index) {
+			if (array_values($index['columns'] ?? []) === array_values($columns) && (!$unique || !empty($index['unique']))) return;
 		}
 		$this->database->exec(
 			'ALTER TABLE ' . $this->quoteName($table) . ' ADD ' . ($unique ? 'UNIQUE ' : '')
@@ -475,22 +504,39 @@ final class CockpitSchemaManager {
 	}
 
 	private function columns(string $table): array {
-		$stmt = $this->database->prepare(
-			'SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_DEFAULT FROM information_schema.COLUMNS '
-			. 'WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=:table'
-		);
-		$stmt->execute([':table' => $table]);
-		$result = [];
-		foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $column) $result[(string)$column['COLUMN_NAME']] = $column;
-		return $result;
+		return $this->database->getColumns($table, true);
 	}
 
 	private function tableExists(string $table): bool {
-		$stmt = $this->database->prepare(
-			'SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME=:table'
-		);
-		$stmt->execute([':table' => $table]);
-		return (bool)$stmt->fetchColumn();
+		return $this->database->tableExists($table);
+	}
+
+	private function dialectName(): string {
+		return (string)$this->database->dialect()->name();
+	}
+
+	private function rebuildSQLiteStatsForeignKey(string $constraint): void {
+		$temp = $this->statsName . '_fk_rebuild';
+		$this->database->beginTransaction();
+		try {
+			$this->database->exec('DROP TABLE IF EXISTS ' . $this->quoteName($temp));
+			$this->database->exec('CREATE TABLE ' . $this->quoteName($temp) . ' (
+				`link_id` INT UNSIGNED NOT NULL,
+				`click_date` DATE NOT NULL,
+				`clicks` BIGINT UNSIGNED NOT NULL DEFAULT 0,
+				PRIMARY KEY (`link_id`, `click_date`),
+				KEY `click_date` (`click_date`),
+				CONSTRAINT ' . $this->quoteName($constraint) . ' FOREIGN KEY (`link_id`) REFERENCES '
+				. $this->quoteName($this->linksName) . ' (`id`) ON DELETE CASCADE
+			)');
+			$this->database->exec('INSERT INTO ' . $this->quoteName($temp) . ' (`link_id`,`click_date`,`clicks`) SELECT `link_id`,`click_date`,`clicks` FROM ' . $this->quoteName($this->statsName));
+			$this->database->exec('DROP TABLE ' . $this->quoteName($this->statsName));
+			$this->database->exec('ALTER TABLE ' . $this->quoteName($temp) . ' RENAME TO ' . $this->quoteName($this->statsName));
+			$this->database->commit();
+		} catch (\Throwable $exception) {
+			if ($this->database->inTransaction()) $this->database->rollBack();
+			throw $exception;
+		}
 	}
 
 	private function countRows(string $table): int {
