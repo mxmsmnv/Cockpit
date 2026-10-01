@@ -512,7 +512,7 @@ final class CockpitSchemaManager {
 	}
 
 	private function dialectName(): string {
-		return (string)$this->database->dialect()->name();
+		return strtolower((string)$this->database->getAttribute(\PDO::ATTR_DRIVER_NAME));
 	}
 
 	private function rebuildSQLiteStatsForeignKey(string $constraint): void {

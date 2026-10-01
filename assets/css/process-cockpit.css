@@ -48,6 +48,8 @@ html.cockpit-admin-page body { overflow-x: hidden; }
 	border-bottom: 1px solid color-mix(in srgb, var(--pw-border-color) 72%, transparent);
 }
 .ProcessCockpit.cockpit-workspace .cockpit-admin-nav-list {
+	min-width: 0;
+	max-width: 100%;
 	margin-bottom: 0;
 	overflow-x: auto;
 	overflow-y: hidden;
@@ -55,6 +57,16 @@ html.cockpit-admin-page body { overflow-x: hidden; }
 	scrollbar-width: thin;
 }
 .ProcessCockpit.cockpit-workspace .cockpit-admin-nav-list > li > a { white-space: nowrap; }
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel {
+	min-width: 0;
+	max-width: 100%;
+	overflow-x: auto;
+	contain: layout paint;
+}
+.ProcessCockpit.cockpit-workspace .cockpit-table-panel table {
+	width: max-content;
+	min-width: 100%;
+}
 .ProcessCockpit.cockpit-workspace .cockpit-admin-settings {
 	display: grid;
 	width: 3rem;
@@ -820,7 +832,12 @@ html.cockpit-admin-page body { overflow-x: hidden; }
 }
 
 @media (max-width: 639px) {
-	.ProcessCockpit.cockpit-workspace .cockpit-admin-nav { margin-bottom: var(--cockpit-space-lg); }
+	.ProcessCockpit.cockpit-workspace .cockpit-admin-nav {
+		min-width: 0;
+		max-width: 100%;
+		margin-bottom: var(--cockpit-space-lg);
+	}
+	.ProcessCockpit.cockpit-workspace .cockpit-admin-nav > .uk-width-expand { min-width: 0; }
 	.ProcessCockpit.cockpit-workspace .cockpit-page-intro,
 	.ProcessCockpit.cockpit-workspace .cockpit-panel-heading { align-items: flex-start; flex-direction: column; }
 	.ProcessCockpit.cockpit-workspace .cockpit-page-intro-actions,

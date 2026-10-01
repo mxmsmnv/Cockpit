@@ -139,7 +139,7 @@ if (strpos($process, 'cockpit-admin-settings') === false || strpos($process, 'uk
 }
 if (strpos($process, 'uk-tab pw-module-tabs') !== false) cockpitAdminUiFail('Legacy tab navigation reintroduced.');
 if (strpos($styles, '.ProcessCockpit.cockpit-workspace') === false) cockpitAdminUiFail('Custom CSS is not scoped to the Cockpit workspace.');
-foreach (['.cockpit-admin > * { min-width: 0; }', '@media (max-width: 639px)', '.cockpit-table-panel table', '.cockpit-admin-nav-list'] as $responsiveBoundary) {
+foreach (['.cockpit-admin > * { min-width: 0; }', '@media (max-width: 639px)', '.cockpit-table-panel table', 'width: max-content;', 'contain: layout paint;', '.cockpit-admin-nav-list', '.cockpit-admin-nav > .uk-width-expand'] as $responsiveBoundary) {
 	if (strpos($styles, $responsiveBoundary) === false) cockpitAdminUiFail("Missing responsive containment boundary: {$responsiveBoundary}.");
 }
 foreach (['eval(', 'new Function(', 'document.write(', 'http://', 'https://'] as $forbiddenScript) {

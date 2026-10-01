@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.3 — 2026-09-30
+
+- Fixed database-driver detection to use PDO's public driver attribute, preventing
+  repeated upgrade failures on ProcessWire versions without a `dialect()` helper.
+- Contained navigation and data tables inside their workspace at phone widths,
+  so wide content scrolls locally instead of widening the admin document.
+- Added layout/paint containment to local table scrollers so mobile emulation
+  cannot expand the layout viewport to a table's intrinsic width.
+
 ## 1.0.2 — 2026-09-26
 
 - Replaced boolean `SUM()` expressions in dashboard link totals with portable

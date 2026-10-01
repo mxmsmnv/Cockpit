@@ -41,7 +41,7 @@ class Cockpit extends WireData implements Module, ConfigurableModule {
 			'summary' => 'Manage custom-path redirects and click statistics from the ProcessWire admin or CLI.',
 			'author' => 'Maxim Semenov',
 			'href' => 'https://github.com/mxmsmnv/Cockpit',
-			'version' => 102,
+			'version' => 103,
 			'requires' => 'ProcessWire>=3.0.200',
 			'singular' => true,
 			'autoload' => true,
