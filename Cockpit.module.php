@@ -41,7 +41,7 @@ class Cockpit extends WireData implements Module, ConfigurableModule {
 			'summary' => 'Manage custom-path redirects and click statistics from the ProcessWire admin or CLI.',
 			'author' => 'Maxim Semenov',
 			'href' => 'https://github.com/mxmsmnv/Cockpit',
-			'version' => 103,
+			'version' => 104,
 			'requires' => 'ProcessWire>=3.0.200',
 			'singular' => true,
 			'autoload' => true,
@@ -1017,7 +1017,11 @@ class Cockpit extends WireData implements Module, ConfigurableModule {
 		$configHost = (string)$this->wire('config')->httpHost;
 		$parsedConfigHost = parse_url('http://' . ltrim($configHost, '/'), PHP_URL_HOST);
 		$siteHost = $this->canonicalHost(is_string($parsedConfigHost) ? $parsedConfigHost : $configHost);
-		if ($targetHost === '' || $targetHost !== $siteHost) return null;
+		$localHosts = array_filter([$siteHost]);
+		$publicBaseUrl = trim((string)$this->get('public_base_url'));
+		$publicBaseHost = $this->canonicalHost((string)parse_url($publicBaseUrl, PHP_URL_HOST));
+		if ($publicBaseHost !== '') $localHosts[] = $publicBaseHost;
+		if ($targetHost === '' || !in_array($targetHost, array_unique($localHosts), true)) return null;
 
 		$path = (string)($parts['path'] ?? '/');
 		$rootPath = trim((string)$this->wire('config')->urls->root, '/');

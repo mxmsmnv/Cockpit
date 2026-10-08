@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4 — 2026-10-07
+
+- Treat the configured public base URL as an origin of the current installation
+  during redirect-cycle validation, so a canonical production URL cannot evade
+  self-loop detection while the same installation is accessed through a local
+  development hostname.
+
 ## 1.0.3 — 2026-09-30
 
 - Fixed database-driver detection to use PDO's public driver attribute, preventing
