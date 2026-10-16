@@ -84,6 +84,13 @@ Install:
 
 Cockpit preserves its tables during uninstall by default. Enable destructive uninstall only when permanent data removal is intentional and backed up.
 
+## PocketWire
+
+Cockpit opts in to PocketWire with one read-only `summary` resource. It requires the
+current ProcessWire actor plus `cockpit-view-stats` (or the legacy `cockpit-manage`
+umbrella permission) and returns only aggregate link and click counters. Link paths,
+destinations, audit history, configuration and write actions are never exposed.
+
 ## Permissions
 
 `cockpit-manage` is the backward-compatible all-access permission. Granular permissions are available for statistics, link management, deletion, import/export, settings, and audit access. Deletion requires both link-management and delete permissions.

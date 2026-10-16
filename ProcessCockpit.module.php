@@ -23,7 +23,7 @@ class ProcessCockpit extends Process {
 			'summary' => 'Create short links and review click statistics.',
 			'author' => 'Maxim Semenov',
 			'href' => 'https://github.com/mxmsmnv/Cockpit',
-			'version' => 104,
+			'version' => 105,
 			'requires' => 'Cockpit',
 			'page' => [
 				'name' => 'cockpit',

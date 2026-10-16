@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 — 2026-10-16
+
+- Added a permission-gated PocketWire read-only provider for aggregate link and click totals.
+- Kept link records, destinations, configuration, audit data and mutations outside the provider contract.
+
 ## 1.0.4 — 2026-10-07
 
 - Treat the configured public base URL as an origin of the current installation

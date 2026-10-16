@@ -7,6 +7,7 @@ require_once __DIR__ . '/src/Routing/bootstrap.php';
 require_once __DIR__ . '/src/Cache/bootstrap.php';
 require_once __DIR__ . '/src/Code/bootstrap.php';
 require_once __DIR__ . '/src/Transfer/bootstrap.php';
+require_once __DIR__ . '/src/CockpitPocketWireProviderTrait.php';
 
 /**
  * Cockpit — managed short URLs with click statistics for ProcessWire.
@@ -16,6 +17,8 @@ require_once __DIR__ . '/src/Transfer/bootstrap.php';
  * the module does not require templates, fields, or URL segments to be added.
  */
 class Cockpit extends WireData implements Module, ConfigurableModule {
+
+	use CockpitPocketWireProviderTrait;
 
 	/** @var \CockpitCli|null */
 	protected $_cli;
@@ -41,7 +44,8 @@ class Cockpit extends WireData implements Module, ConfigurableModule {
 			'summary' => 'Manage custom-path redirects and click statistics from the ProcessWire admin or CLI.',
 			'author' => 'Maxim Semenov',
 			'href' => 'https://github.com/mxmsmnv/Cockpit',
-			'version' => 104,
+			'version' => 105,
+			'pocketWireProvider' => true,
 			'requires' => 'ProcessWire>=3.0.200',
 			'singular' => true,
 			'autoload' => true,
